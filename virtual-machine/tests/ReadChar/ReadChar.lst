@@ -1,0 +1,20 @@
+
+ReadChar/ReadChar:     file format elf32-littleriscv
+
+
+Disassembly of section .text:
+
+00000000 <_start>:
+   0:	7ff00113          	li	sp,2047
+   4:	00c000ef          	jal	ra,10 <main>
+   8:	000017b7          	lui	a5,0x1
+   c:	80078623          	sb	zero,-2036(a5) # 80c <ADDR_END+0xc>
+
+00000010 <main>:
+  10:	00001737          	lui	a4,0x1
+  14:	81270793          	addi	a5,a4,-2030 # 812 <ADDR_END+0x12>
+  18:	0007a783          	lw	a5,0(a5)
+  1c:	0ff7f793          	zext.b	a5,a5
+  20:	80f72023          	sw	a5,-2048(a4)
+  24:	00000513          	li	a0,0
+  28:	00008067          	ret
