@@ -1,0 +1,7 @@
+1. Describe how your exchange works.
+The exchange first read the product file and store in products array. For each trader provided in command line argument, i use a while-loop to create pipe between each trader and exchnage, then create child process for trader and launch trader process. I store the all pipe and process pid in array, ordering in the trader id. While all pipes and process connect succesful, exchange whould send all trader "market open" message and start exchange. The main exchange using a while-loop, and break when all trader disconnect, as set a disconnect number, if disconnect trader number equal to trader number, loop would stop. In main flow, exchange first wait for the signal from trader, it can be whether SIGUSER1 or SIGCHILD. It would check the pid from which trader, then if SIGUSER1 recieved, it would open pipe and check the order from trader, if valid, then do the following work. If recieved SIGCHILD, it would increase the disconnect number and close pipe than to the next loop. After all trader disconnected, exchange will close.
+
+2. Describe your design decisions for the trader and how it's fault-tolerant.
+The trader starting with open pipe in trader side, then check pipe are successful connect. While pipe connect, it would wait for "market open". Then it would read from the market message, and give related order.
+
+3. Describe your tests and how to run them.
